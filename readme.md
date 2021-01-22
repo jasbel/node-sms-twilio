@@ -1,8 +1,9 @@
 ### user access
 https://www.twilio.com/
-
-user: iiotatlas.test@gmail.com
-pass: AtlasAutomation
+<!---
+  user: iiotatlas.test@gmail.com
+  pass: AtlasAutomation
+-->
 
 ## Dependencias
 |  |  |
