@@ -1,7 +1,5 @@
+require('dotenv').config();
 const app = require('./server');
 require("./database")
 
-const port = 3000;
-
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen( app.get('port'), () => console.log(`Example app listening on port ${app.get('port')}!`));
