@@ -7,26 +7,14 @@ const SMS = require('../models/sms');
 //TODO: only testing
 const {defaultPhone, name} = require('../config');
 
-router.get('/', async (req, res) => {
-    /** lean: convierte formato Bson a Json */
-    const messages = await SMS.find().lean();
-    messages.forEach(m => console.log(m.Body));
-    res.render('index', {messages, defaultPhone, name})
-});
+const {indexController, postMessage, reciveMessage} = require('../controllers/index.controller')
 
-router.post('/send-sms', async (req, res) => {
+//Main Routes
+router.get('/', indexController);
 
-    const { message, phone } = req.body;
+//Send an SMS
+router.post('/send-sms', postMessage)
 
-    if(!message || !phone) return res.json('Missing message or phone');
-
-    const result = await sendMessage(req.body.message, req.body.phone);
-
-    console.log(result);
-
-    await SMS.create({Body: req.body.message, To: req.body.phone});
-
-    res.redirect("/");
-})
+router.post('/sms', reciveMessage)
 
 module.exports = router
