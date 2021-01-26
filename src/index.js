@@ -7,4 +7,4 @@ const server = http.createServer(app);
 require("./database");
 require('./sockets').connection(server);
 
-app.listen( app.get('port'), () => console.log(`Example app listening on port ${app.get('port')}!`));
+server.listen( app.get('port'), () => console.log(`Example app listening on port ${app.get('port')}!`));

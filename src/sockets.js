@@ -1,16 +1,15 @@
-const socketIO = require("socket.io");
+const socketIO = require('socket.io');
 
 let socket;
 
-const connection = (server) => {
-    // Adding socket connection to the server
+const connection = server => {
     // const io = socketIO.listen(server);
-    const io =socketIO(server);
+    const io = socketIO(server);
 
-    // Handle events
+    /** Handle events */
     io.on("connection", (newSocket) => {
         socket = newSocket;
-        console.log("Socket ID: ",newSocket.id);
+        // console.log("Socket ID: ",newSocket.id);
     });
 };
 

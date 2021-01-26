@@ -1,5 +1,5 @@
-const { sendMessage } = require("../twilio/sendSms");
 const SMS = require('../models/sms');
+const { sendMessage } = require("../twilio/sendSms");
 
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
@@ -14,7 +14,7 @@ const indexController = async (req, res) => {
     */
     const messages = await SMS.find().sort('-createdAt').lean();
     messages.forEach(m => console.log(m.Body));
-    res.render('index', {messages, defaultPhone, name})
+    res.render('index', { messages, defaultPhone, name })
 }
 
 const postMessage = async (req, res) => {
@@ -33,23 +33,29 @@ const postMessage = async (req, res) => {
 }
 
 const receiveMessage = async (req, res) => {
-    /** recupera el mensaje enviado desde el celular */
-    console.log(req.body);
-
-    /** Guarda el mensaje enviado desde el celular hacia nuestra base de datos */
-    const saveSMS = await SMS.create({
-        Body: req.body.Body,
-        From: req.body.From,
-    })
-
-    /** Emitir evento con el socket y enviar el mensaje  */
-    getSocket().emit('new message', saveSMS)
-
     /** Twilio responde al mensaje enviado, al mismo celular */
     const twiml = new MessagingResponse();
     // twiml.message('This is my response')
 
-    res.send(twiml.toString())
+    /** recupera el mensaje enviado desde el celular */
+    // console.log(req.body.Body);
+
+    /** Guarda el mensaje enviado desde el celular hacia nuestra base de datos */
+    const savedSMS = await SMS.create({
+        Body: req.body.Body,
+        From: req.body.From,
+    });
+
+    /** Emitir evento con el socket y enviar el mensaje  */
+    getSocket().emit('new message', savedSMS);
+
+    res.writeHead(200, { "Content-Type": "text/xml" });
+    // twiml.message('This is my response');
+    // console.log(twiml.toString())
+
+    // Reponse Back SMS
+    // res.end('<Response></Response>')
+    res.end(twiml.toString());
 }
 
 module.exports = {
