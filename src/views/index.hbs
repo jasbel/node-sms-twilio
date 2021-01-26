@@ -16,13 +16,23 @@
 
         {{#if messages}}
             <h4>List Messages</h4>
-            {{#each messages}}
-                <div class="card card-body">
-                    <p>{{Body}}</p>
-                    {{!-- <span>{{hideNumber To}}</span> --}}
-                    <span>{{To}}</span>
-                </div>
-            {{/each}}
+            <ul id="messages" class="list-group" style="height: 70vh; overflow-y: auto;">
+                {{#each messages}}
+                    <li class="list-group-item list-group-item-info list-group-item-action">
+                        <p>Body :{{Body}}</p>
+                        {{!-- <span>{{hideNumber To}}</span> --}}
+                        <p>ID: {{_id}}</p>
+                        {{#if To}}
+                            <span>To: {{To}}</span>
+                        {{/if}}
+                        {{#if From}}
+                            <span>From: {{From}}</span>
+                        {{/if}}
+                        <p>{{timeago createdAt}}</p>
+
+                    </li>
+                {{/each}}
+            </ul>
         {{else messages}}
             <p>No messages Yet</p>
         {{/if}}

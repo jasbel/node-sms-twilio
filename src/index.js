@@ -1,5 +1,10 @@
 require('dotenv').config();
+
+const http = require('http');
 const app = require('./server');
-require("./database")
+const server = http.createServer(app);
+
+require("./database");
+require('./sockets').connection(server);
 
 app.listen( app.get('port'), () => console.log(`Example app listening on port ${app.get('port')}!`));

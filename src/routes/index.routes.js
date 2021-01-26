@@ -7,7 +7,7 @@ const SMS = require('../models/sms');
 //TODO: only testing
 const {defaultPhone, name} = require('../config');
 
-const {indexController, postMessage, reciveMessage} = require('../controllers/index.controller')
+const {indexController, postMessage, receiveMessage} = require('../controllers/index.controller')
 
 //Main Routes
 router.get('/', indexController);
@@ -15,6 +15,6 @@ router.get('/', indexController);
 //Send an SMS
 router.post('/send-sms', postMessage)
 
-router.post('/sms', reciveMessage)
+router.post('/sms', receiveMessage)
 
 module.exports = router
