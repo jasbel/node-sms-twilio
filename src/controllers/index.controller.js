@@ -13,11 +13,14 @@ const indexController = async (req, res) => {
      *  sort() : ordenar por fecha de creacion, (-) desde el ultimo registro hasta el mas viejo
     */
     const messages = await SMS.find().sort('-createdAt').lean();
-    messages.forEach(m => console.log(m.Body));
+    // messages.forEach(m => console.log(m.Body));
     res.render('index', { messages, defaultPhone, name })
 }
 
 const postMessage = async (req, res) => {
+
+    console.log("request ==============");
+    console.log(req);
 
     const { message, phone } = req.body;
 
@@ -37,9 +40,6 @@ const receiveMessage = async (req, res) => {
     const twiml = new MessagingResponse();
     // twiml.message('This is my response')
 
-    /** recupera el mensaje enviado desde el celular */
-    // console.log(req.body.Body);
-
     /** Guarda el mensaje enviado desde el celular hacia nuestra base de datos */
     const savedSMS = await SMS.create({
         Body: req.body.Body,
@@ -50,8 +50,6 @@ const receiveMessage = async (req, res) => {
     getSocket().emit('new message', savedSMS);
 
     res.writeHead(200, { "Content-Type": "text/xml" });
-    // twiml.message('This is my response');
-    // console.log(twiml.toString())
 
     // Reponse Back SMS
     // res.end('<Response></Response>')

@@ -2,9 +2,7 @@ const socket = io();
 const d = document;
 
 /** Pedir permiso al usuario cuando inicie aplicacion */
-Notification.requestPermission().then(function (result) {
-    console.log(result);
-  });
+Notification.requestPermission().then(function (result) { });
 
 /** Notificacioes */
 const notifyMe = (message =  "Hi there!") => {
@@ -29,7 +27,7 @@ const notifyMe = (message =  "Hi there!") => {
 
 /** Recive el mensaje desde el celular hasta la interfaz web  */
 socket.on('new message', data =>{
-    console.log(data);
+    // console.log(data);
 
     /** NOtificando el mensase */
     notifyMe("New Message received: ",data.Body)
