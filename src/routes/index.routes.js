@@ -1,12 +1,6 @@
 const {Router} = require('express');
 const router = Router();
 
-const { sendMessage } = require('../twilio/sendSms');
-const SMS = require('../models/sms');
-
-//TODO: only testing
-const {defaultPhone, name} = require('../config');
-
 const {indexController, postMessage, receiveMessage} = require('../controllers/index.controller')
 
 //Main Routes
