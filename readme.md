@@ -1,3 +1,13 @@
+Tutorial by Fazt-Code Examples: https://www.youtube.com/watch?v=sw3CPCRk-XE&list=PLo5lAe9kQrwpaPnC4v1LRIS3QgdPomce2  
+
+USE
+Twilio for SMS
+Socket.io for Real Time Messages
+Notificacion Push: Api Nativa para notificaciones web (only desktop ?)
+Template Engine: Use handlebars, optional Pug, Ejs, React
+...
+
+
 ### user access
 https://www.twilio.com/
 <!--- Comment
